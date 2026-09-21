@@ -66,7 +66,7 @@
                 <div class="lg:col-span-4 space-y-4 md:space-y-6">
                     
                     <!-- 评标模式 -->
-                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 md:p-6 card-hover">
+                    <div class="panel-card panel-card--lift">
                         <div class="flex items-center gap-3 mb-4 md:mb-5">
                             <div class="w-9 h-9 md:w-10 md:h-10 rounded-lg bg-primary-100 flex items-center justify-center flex-shrink-0">
                                 <svg class="w-4 h-4 md:w-5 md:h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -100,7 +100,7 @@
                     </div>
 
                     <!-- 限价设置 -->
-                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 md:p-6 card-hover">
+                    <div class="panel-card panel-card--lift">
                         <div class="flex items-center gap-3 mb-4 md:mb-5">
                             <div class="w-9 h-9 md:w-10 md:h-10 rounded-lg bg-amber-100 flex items-center justify-center flex-shrink-0">
                                 <svg class="w-4 h-4 md:w-5 md:h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -127,7 +127,7 @@
                     </div>
 
                     <!-- 评分规则 -->
-                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 md:p-6 card-hover">
+                    <div class="panel-card panel-card--lift">
                         <div class="flex items-center gap-3 mb-4 md:mb-5">
                             <div class="w-9 h-9 md:w-10 md:h-10 rounded-lg bg-emerald-100 flex items-center justify-center flex-shrink-0">
                                 <svg class="w-4 h-4 md:w-5 md:h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -168,7 +168,7 @@
                     </div>
                     
                     <!-- 计算公式（仅桌面端显示） -->
-                    <div class="hidden md:block bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                    <div class="hidden md:block panel-card">
                         <div class="flex items-center gap-3 mb-4">
                             <div class="w-10 h-10 rounded-lg bg-slate-100 flex items-center justify-center">
                                 <svg class="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -193,7 +193,7 @@
                 <div class="lg:col-span-8 space-y-4 md:space-y-6">
 
                     <!-- 方案管理 -->
-                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 md:p-6 card-hover">
+                    <div class="panel-card panel-card--lift">
                         <div class="flex items-center gap-3 mb-4 md:mb-5">
                             <div class="w-9 h-9 md:w-10 md:h-10 rounded-lg bg-indigo-100 flex items-center justify-center flex-shrink-0">
                                 <svg class="w-4 h-4 md:w-5 md:h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -290,7 +290,7 @@
                     </div>
                     
                     <!-- 投标报价 -->
-                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 md:p-6 card-hover">
+                    <div class="panel-card panel-card--lift">
                         <div class="flex items-center justify-between mb-4 md:mb-5">
                             <div class="flex items-center gap-3">
                                 <div class="w-9 h-9 md:w-10 md:h-10 rounded-lg bg-blue-100 flex items-center justify-center flex-shrink-0">
@@ -371,7 +371,7 @@
                     </div>
 
                     <!-- 计算结果 -->
-                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 md:p-6 card-hover" x-show="bids.length > 0 && !compareMode" x-transition>
+                    <div class="panel-card panel-card--lift" x-show="bids.length > 0 && !compareMode" x-transition>
                         <div class="flex items-center gap-3 mb-4 md:mb-5">
                             <div class="w-9 h-9 md:w-10 md:h-10 rounded-lg bg-purple-100 flex items-center justify-center flex-shrink-0">
                                 <svg class="w-4 h-4 md:w-5 md:h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -412,11 +412,11 @@
                                         <!-- 排名徽章 -->
                                         <div x-show="result.isValid && result.rank <= 3"
                                             :class="{'rank-1': result.rank === 1, 'rank-2': result.rank === 2, 'rank-3': result.rank === 3}"
-                                            class="w-7 h-7 md:w-8 md:h-8 rounded-full flex items-center justify-center text-white font-bold text-xs md:text-sm shadow-lg flex-shrink-0">
+                                            class="rank-dot rank-dot--lg rank-dot--shadow">
                                             <span x-text="result.rank"></span>
                                         </div>
                                         <div x-show="!result.isValid || result.rank > 3"
-                                            class="w-7 h-7 md:w-8 md:h-8 rounded-full bg-slate-200 flex items-center justify-center text-slate-500 font-medium text-xs md:text-sm flex-shrink-0">
+                                            class="rank-dot rank-dot--lg rank-dot--plain">
                                             <span x-text="result.rank || '-'"></span>
                                         </div>
                                         
@@ -444,12 +444,12 @@
                                     
                                     <div class="flex items-center gap-2 md:gap-3 flex-shrink-0">
                                         <!-- 状态徽章 -->
-                                        <span x-show="result.isValid" 
-                                            class="hidden sm:inline-block px-2 md:px-3 py-1 rounded-full text-xs font-medium valid-badge text-white">
+                                        <span x-show="result.isValid"
+                                            class="status-badge status-badge--valid hidden sm:inline-block">
                                             有效
                                         </span>
-                                        <span x-show="!result.isValid" 
-                                            class="px-2 md:px-3 py-1 rounded-full text-xs font-medium invalid-badge text-white whitespace-nowrap">
+                                        <span x-show="!result.isValid"
+                                            class="status-badge status-badge--invalid">
                                             <span x-text="result.invalidReason"></span>
                                         </span>
                                         
@@ -469,7 +469,7 @@
                     </div>
 
                     <!-- 方案对比结果 -->
-                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 md:p-6 card-hover" x-show="compareMode" x-transition>
+                    <div class="panel-card panel-card--lift" x-show="compareMode" x-transition>
                         <div class="flex items-center justify-between mb-4 md:mb-5">
                             <div class="flex items-center gap-3">
                                 <div class="w-9 h-9 md:w-10 md:h-10 rounded-lg bg-indigo-100 flex items-center justify-center flex-shrink-0">
@@ -490,7 +490,7 @@
 
                         <!-- 基准价对比 -->
                         <div class="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl p-3 md:p-5 mb-4 md:mb-6">
-                            <div class="overflow-x-auto">
+                            <div class="overflow-x-auto slim-scrollbar">
                                 <div class="flex gap-4 md:gap-6 min-w-max">
                                     <template x-for="result in compareResults" :key="result.scenarioId">
                                         <div class="text-center px-4 py-2 bg-white/80 rounded-lg">
@@ -525,36 +525,36 @@
                         </div>
 
                         <!-- 排名对比表 -->
-                        <div class="overflow-x-auto">
-                            <table class="w-full text-sm">
+                        <div class="overflow-x-auto slim-scrollbar">
+                            <table class="data-table data-table--row-hover">
                                 <thead>
-                                    <tr class="border-b border-slate-200">
-                                        <th class="text-left py-3 px-2 font-semibold text-slate-600 sticky left-0 bg-white z-10">投标单位</th>
+                                    <tr>
+                                        <th class="text-left font-semibold text-slate-600 sticky-col">投标单位</th>
                                         <template x-for="result in compareResults" :key="result.scenarioId">
-                                            <th class="text-center py-3 px-2 font-semibold text-slate-600 min-w-[120px]">
+                                            <th class="text-center font-semibold text-slate-600 min-w-[120px]">
                                                 <span class="block truncate" x-text="result.scenarioName"></span>
                                             </th>
                                         </template>
-                                        <th class="text-center py-3 px-2 font-semibold text-slate-600 min-w-[100px]">差异分析</th>
+                                        <th class="text-center font-semibold text-slate-600 min-w-[100px]">差异分析</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <template x-for="bidderName in allBidderNames" :key="bidderName">
-                                        <tr class="border-b border-slate-100 hover:bg-slate-50 transition-colors">
-                                            <td class="py-3 px-2 font-medium text-slate-800 sticky left-0 bg-white z-10" x-text="bidderName"></td>
+                                        <tr>
+                                            <td class="font-medium text-slate-800 sticky-col" x-text="bidderName"></td>
                                             <template x-for="result in compareResults" :key="result.scenarioId">
-                                                <td class="py-3 px-2 text-center">
+                                                <td class="text-center">
                                                     <template x-if="getBidderData(bidderName, result)">
                                                         <div>
                                                             <div class="flex items-center justify-center gap-1 mb-1">
                                                                 <!-- 排名 -->
                                                                 <span x-show="getBidderData(bidderName, result).isValid && getBidderData(bidderName, result).rank <= 3"
                                                                     :class="{'rank-1': getBidderData(bidderName, result).rank === 1, 'rank-2': getBidderData(bidderName, result).rank === 2, 'rank-3': getBidderData(bidderName, result).rank === 3}"
-                                                                    class="w-6 h-6 rounded-full flex items-center justify-center text-white font-bold text-xs">
+                                                                    class="rank-dot">
                                                                     <span x-text="getBidderData(bidderName, result).rank"></span>
                                                                 </span>
                                                                 <span x-show="!getBidderData(bidderName, result).isValid || getBidderData(bidderName, result).rank > 3"
-                                                                    class="w-6 h-6 rounded-full bg-slate-200 flex items-center justify-center text-slate-500 font-medium text-xs">
+                                                                    class="rank-dot rank-dot--plain">
                                                                     <span x-text="getBidderData(bidderName, result).rank || '-'"></span>
                                                                 </span>
                                                             </div>
@@ -575,7 +575,7 @@
                                                 </td>
                                             </template>
                                             <!-- 差异分析 -->
-                                            <td class="py-3 px-2 text-center">
+                                            <td class="text-center">
                                                 <template x-if="compareResults.length >= 2">
                                                     <div class="text-xs">
                                                         <template x-if="getBidderData(bidderName, compareResults[0]) && getBidderData(bidderName, compareResults[1])">
@@ -610,67 +610,67 @@
                         <!-- 方案配置对比 -->
                         <div class="mt-6 pt-4 border-t border-slate-200">
                             <h3 class="text-sm font-semibold text-slate-700 mb-3">配置参数对比</h3>
-                            <div class="overflow-x-auto">
-                                <table class="w-full text-sm">
+                            <div class="overflow-x-auto slim-scrollbar">
+                                <table class="data-table data-table--compact">
                                     <thead>
-                                        <tr class="border-b border-slate-200">
-                                            <th class="text-left py-2 px-2 font-medium text-slate-500 sticky left-0 bg-white z-10">参数</th>
+                                        <tr>
+                                            <th class="text-left font-medium text-slate-500 sticky-col">参数</th>
                                             <template x-for="result in compareResults" :key="result.scenarioId">
-                                                <th class="text-center py-2 px-2 font-medium text-slate-500" x-text="result.scenarioName"></th>
+                                                <th class="text-center font-medium text-slate-500" x-text="result.scenarioName"></th>
                                             </template>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="border-b border-slate-100">
-                                            <td class="py-2 px-2 text-slate-600 sticky left-0 bg-white z-10">评标模式</td>
+                                        <tr>
+                                            <td class="text-slate-600 sticky-col">评标模式</td>
                                             <template x-for="result in compareResults" :key="result.scenarioId">
-                                                <td class="py-2 px-2 text-center">
+                                                <td class="text-center">
                                                     <span class="text-xs px-2 py-1 rounded-full"
                                                         :class="result.config.mode === 'single' ? 'bg-blue-100 text-blue-700' : 'bg-purple-100 text-purple-700'"
                                                         x-text="result.config.mode === 'single' ? '单低模式' : '双低模式'"></span>
                                                 </td>
                                             </template>
                                         </tr>
-                                        <tr class="border-b border-slate-100">
-                                            <td class="py-2 px-2 text-slate-600 sticky left-0 bg-white z-10">价格满分</td>
+                                        <tr>
+                                            <td class="text-slate-600 sticky-col">价格满分</td>
                                             <template x-for="result in compareResults" :key="result.scenarioId">
-                                                <td class="py-2 px-2 text-center text-slate-800" x-text="result.config.fullScore"></td>
+                                                <td class="text-center text-slate-800" x-text="result.config.fullScore"></td>
                                             </template>
                                         </tr>
-                                        <tr class="border-b border-slate-100">
-                                            <td class="py-2 px-2 text-slate-600 sticky left-0 bg-white z-10">上浮扣分/1%</td>
+                                        <tr>
+                                            <td class="text-slate-600 sticky-col">上浮扣分/1%</td>
                                             <template x-for="result in compareResults" :key="result.scenarioId">
-                                                <td class="py-2 px-2 text-center text-amber-600" x-text="result.config.deductUp"></td>
+                                                <td class="text-center text-amber-600" x-text="result.config.deductUp"></td>
                                             </template>
                                         </tr>
-                                        <tr class="border-b border-slate-100">
-                                            <td class="py-2 px-2 text-slate-600 sticky left-0 bg-white z-10">下浮扣分/1%</td>
+                                        <tr>
+                                            <td class="text-slate-600 sticky-col">下浮扣分/1%</td>
                                             <template x-for="result in compareResults" :key="result.scenarioId">
-                                                <td class="py-2 px-2 text-center text-emerald-600" x-text="result.config.deductDown"></td>
+                                                <td class="text-center text-emerald-600" x-text="result.config.deductDown"></td>
                                             </template>
                                         </tr>
-                                        <tr class="border-b border-slate-100" x-show="compareResults.some(r => r.config.mode === 'double')">
-                                            <td class="py-2 px-2 text-slate-600 sticky left-0 bg-white z-10">最低价权重</td>
+                                        <tr x-show="compareResults.some(r => r.config.mode === 'double')">
+                                            <td class="text-slate-600 sticky-col">最低价权重</td>
                                             <template x-for="result in compareResults" :key="result.scenarioId">
-                                                <td class="py-2 px-2 text-center">
+                                                <td class="text-center">
                                                     <span x-show="result.config.mode === 'double'" x-text="result.config.lowestWeight + '%'"></span>
                                                     <span x-show="result.config.mode !== 'double'" class="text-slate-300">-</span>
                                                 </td>
                                             </template>
                                         </tr>
-                                        <tr class="border-b border-slate-100">
-                                            <td class="py-2 px-2 text-slate-600 sticky left-0 bg-white z-10">上限价</td>
+                                        <tr>
+                                            <td class="text-slate-600 sticky-col">上限价</td>
                                             <template x-for="result in compareResults" :key="result.scenarioId">
-                                                <td class="py-2 px-2 text-center">
+                                                <td class="text-center">
                                                     <span x-show="result.config.maxPrice" x-text="result.config.maxPrice + '万'"></span>
                                                     <span x-show="!result.config.maxPrice" class="text-slate-300">不限制</span>
                                                 </td>
                                             </template>
                                         </tr>
                                         <tr>
-                                            <td class="py-2 px-2 text-slate-600 sticky left-0 bg-white z-10">下限价</td>
+                                            <td class="text-slate-600 sticky-col">下限价</td>
                                             <template x-for="result in compareResults" :key="result.scenarioId">
-                                                <td class="py-2 px-2 text-center">
+                                                <td class="text-center">
                                                     <span x-show="result.config.minPrice" x-text="result.config.minPrice + '万'"></span>
                                                     <span x-show="!result.config.minPrice" class="text-slate-300">不限制</span>
                                                 </td>
