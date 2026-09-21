@@ -1,23 +1,67 @@
 /* ================================
    投标报价计算器 - 样式文件
+   结构：设计变量 → 基础 → 组件 → 动效 → 响应式
+   断点集中在文末，640px 与 Tailwind 的 sm 断点对齐
    ================================ */
 
-/* 基础重置 */
+/* ---------- 设计变量 ---------- */
+:root {
+    /* 卡片悬浮与数字动画共用缓动 */
+    --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* 横向滚动条配色 */
+    --scrollbar-track: #f1f5f9;
+    --scrollbar-thumb: #cbd5e1;
+    --scrollbar-thumb-hover: #94a3b8;
+}
+
+/* ---------- 基础 ---------- */
+
+/* Alpine 就绪前隐藏模板 */
 [x-cloak] { display: none !important; }
 
 /* 禁止iOS双击缩放 */
 * { touch-action: manipulation; }
 
-/* 玻璃卡片效果 */
-.glass-card {
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+/* 数字输入框：隐藏步进按钮 */
+input[type="number"] {
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
 }
 
-/* 渐变背景 */
-.gradient-bg {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* 安全区域适配 */
+.safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* ---------- 徽章 ----------
+   全部渐变徽章共用一条渐变写法，颜色由各自的变量给出；
+   排名金银铜与有效/无效红绿色值保持不变 */
+.valid-badge,
+.invalid-badge,
+.rank-1,
+.rank-2,
+.rank-3 {
+    background: linear-gradient(135deg, var(--badge-from) 0%, var(--badge-to) 100%);
+}
+
+.valid-badge   { --badge-from: #10B981; --badge-to: #34D399; }
+.invalid-badge { --badge-from: #EF4444; --badge-to: #F87171; }
+.rank-1        { --badge-from: #FFD700; --badge-to: #FFA500; }
+.rank-2        { --badge-from: #C0C0C0; --badge-to: #A8A8A8; }
+.rank-3        { --badge-from: #CD7F32; --badge-to: #B87333; }
+
+/* ---------- 卡片与输入 ---------- */
+
+/* 卡片悬浮过渡（悬浮位移与投影见文末响应式一节） */
+.card-hover {
+    transition: all 0.3s var(--ease-standard);
 }
 
 /* 输入框聚焦效果 */
@@ -25,34 +69,11 @@
     box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
 }
 
-/* 卡片悬浮效果 */
-.card-hover {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-@media (hover: hover) {
-    .card-hover:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-    }
-}
-
-/* 徽章样式 */
-.score-badge {
-    background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
-}
-
-.invalid-badge {
-    background: linear-gradient(135deg, #EF4444 0%, #F87171 100%);
-}
-
-.valid-badge {
-    background: linear-gradient(135deg, #10B981 0%, #34D399 100%);
-}
+/* ---------- 动效 ---------- */
 
 /* 数字动画 */
 .animate-number {
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.5s var(--ease-standard);
 }
 
 /* 滑入动画 */
@@ -71,75 +92,56 @@
     animation: slideIn 0.3s ease-out;
 }
 
-/* 排名徽章 */
-.rank-1 { background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); }
-.rank-2 { background: linear-gradient(135deg, #C0C0C0 0%, #A8A8A8 100%); }
-.rank-3 { background: linear-gradient(135deg, #CD7F32 0%, #B87333 100%); }
+/* 对比模式切换动画（保持原有 ease 观感，不并入统一缓动） */
+[x-transition] {
+    transition: all 0.3s ease;
+}
 
-/* 移动端删除按钮始终可见 */
+/* ---------- 横向滚动条 ---------- */
+.overflow-x-auto::-webkit-scrollbar {
+    height: 6px;
+}
+
+.overflow-x-auto::-webkit-scrollbar-track,
+.overflow-x-auto::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+}
+
+.overflow-x-auto::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+}
+
+.overflow-x-auto::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+}
+
+.overflow-x-auto::-webkit-scrollbar-thumb:hover {
+    background: var(--scrollbar-thumb-hover);
+}
+
+/* ---------- 响应式（断点集中于此） ---------- */
+
+/* 仅可悬浮设备：卡片悬浮上浮 + 投影 */
+@media (hover: hover) {
+    .card-hover:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    }
+}
+
+/* 触屏设备：删除按钮始终可见 */
 @media (hover: none) {
     .mobile-visible {
         opacity: 1 !important;
     }
 }
 
-/* 移动端输入框优化 */
-input[type="number"] {
-    -webkit-appearance: none;
-    -moz-appearance: textfield;
-}
-
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-/* 安全区域适配 */
-.safe-area-bottom {
-    padding-bottom: env(safe-area-inset-bottom);
-}
-
-/* 表格样式 */
-table {
-    border-collapse: collapse;
-}
-
-/* 方案对比卡片动画 */
-.scenario-card {
-    transition: all 0.2s ease;
-}
-
-/* 对比模式切换动画 */
-[x-transition] {
-    transition: all 0.3s ease;
-}
-
-/* 滚动条美化 */
-.overflow-x-auto::-webkit-scrollbar {
-    height: 6px;
-}
-
-.overflow-x-auto::-webkit-scrollbar-track {
-    background: #f1f5f9;
-    border-radius: 3px;
-}
-
-.overflow-x-auto::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
-    border-radius: 3px;
-}
-
-.overflow-x-auto::-webkit-scrollbar-thumb:hover {
-    background: #94a3b8;
-}
-
-/* 响应式表格优化 */
+/* 窄屏：表格紧凑化 */
 @media (max-width: 640px) {
     table {
         font-size: 0.75rem;
     }
-    
+
     th, td {
         padding: 0.5rem 0.25rem;
     }
